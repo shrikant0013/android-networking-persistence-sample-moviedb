@@ -16,6 +16,9 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        //Because DBFlow3 is still not officially released, you need also add https://jitpack.io to
+        // your allprojects -> repositories dependency list:
+         maven { url "https://jitpack.io" }
     }
 }
 

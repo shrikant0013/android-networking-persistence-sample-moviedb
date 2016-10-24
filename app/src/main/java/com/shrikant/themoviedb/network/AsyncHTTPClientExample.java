@@ -11,7 +11,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.RequestParams;
 import com.loopj.android.http.TextHttpResponseHandler;
 import com.shrikant.themoviedb.R;
-import com.shrikant.themoviedb.adapters.ComplexRecyclerViewCurrentMoviesAdapter;
+import com.shrikant.themoviedb.adapters.RecyclerViewMoviesAdapter;
 import com.shrikant.themoviedb.models.Movie;
 
 import android.content.Context;
@@ -30,18 +30,19 @@ import cz.msebera.android.httpclient.Header;
 
 public class AsyncHTTPClientExample implements NetworkClient{
 
+    private static final String TAG = "AsyncHTTPClientExample";
     private final static String API_KEY = "api_key";
     private final static String LANGUAGE = "language";
     private String URL = "https://api.themoviedb.org/3/movie/now_playing";
-    private ComplexRecyclerViewCurrentMoviesAdapter mComplexRecyclerViewCurrentMoviesAdapter;
+    private RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
     private ArrayList<Movie> mMovies;
     private Context mContext;
 
     public AsyncHTTPClientExample(
-            ComplexRecyclerViewCurrentMoviesAdapter complexRecyclerViewCurrentMoviesAdapter,
+            RecyclerViewMoviesAdapter recyclerViewMoviesAdapter,
             ArrayList<Movie> movies,
             Context context) {
-        mComplexRecyclerViewCurrentMoviesAdapter = complexRecyclerViewCurrentMoviesAdapter;
+        mRecyclerViewMoviesAdapter = recyclerViewMoviesAdapter;
         mMovies = movies;
         mContext = context;
     }
@@ -77,20 +78,20 @@ public class AsyncHTTPClientExample implements NetworkClient{
                         }
                     }
                 } catch (JsonSyntaxException e) {
-                    Log.w("AsyncHttpClient", "Exception while parsing json " + e.getMessage());
+                    Log.w(TAG, "Exception while parsing json " + e.getMessage());
 //                    Snackbar.make(, R.string.snackbar_network_error, Snackbar.LENGTH_LONG)
 //                            .show(); // Don’t forget to show!
                     Toast.makeText(mContext, "Opps looks like " +
                                     "some problem, try searching again",
                             Toast.LENGTH_SHORT).show();
                 }
-                mComplexRecyclerViewCurrentMoviesAdapter.notifyDataSetChanged();
+                mRecyclerViewMoviesAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, String response,
                                   Throwable throwable) {
-                Log.w("AsyncHttpClient", "HTTP Request failure: " + statusCode + " " +
+                Log.w(TAG, "HTTP Request failure: " + statusCode + " " +
                         throwable.getMessage());
 
 //                if (!isNetworkAvailable()) {

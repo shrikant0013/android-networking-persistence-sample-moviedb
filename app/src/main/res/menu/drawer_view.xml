@@ -1,31 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--<group android:checkableBehavior="single">-->
-        <!--<item-->
-            <!--android:id="@+id/nav_first_fragment"-->
-            <!--android:icon="@drawable/ic_one"-->
-            <!--android:title="First" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_second_fragment"-->
-            <!--android:icon="@drawable/ic_two"-->
-            <!--android:title="Second" />-->
-        <!--<item-->
-            <!--android:id="@+id/nav_third_fragment"-->
-            <!--android:icon="@drawable/ic_three"-->
-            <!--android:title="Third" />-->
-    <!--</group>-->
-
     <item android:title="Networking">
         <menu>
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_nowplaying_fragment"
                     android:icon="@drawable/ic_one"
-                    android:title="Async" />
+                    android:title="AsyncTask" />
                 <item
-                    android:id="@+id/nav_popular_fragment"
+                    android:id="@+id/nav_favourite_fragment"
                     android:icon="@drawable/ic_two"
                     android:title="AsyncHttpClient" />
+
+                <item
+                    android:id="@+id/nav_popular_fragment"
+                    android:icon="@drawable/ic_three"
+                    android:title="OkHttp" />
+
                 <item
                     android:id="@+id/nav_toprated_fragment"
                     android:icon="@drawable/ic_three"
@@ -33,7 +24,6 @@
             </group>
         </menu>
     </item>
-
     <item android:title="Persistence">
         <menu>
             <group android:checkableBehavior="single">
@@ -44,9 +34,18 @@
                 <item
                     android:id="@+id/nav_sugarorm_fragment"
                     android:icon="@drawable/ic_two"
-                    android:title="SugarORM" />
+                    android:title="SQLite" />
             </group>
         </menu>
     </item>
-
+    <item android:title="Listeners">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_customlistner_fragment"
+                    android:icon="@drawable/ic_one"
+                    android:title="Custom Listeners" />
+            </group>
+        </menu>
+    </item>
 </menu>

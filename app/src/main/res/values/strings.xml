@@ -5,5 +5,7 @@
     <string name="nav_now_playing">Movies now playing!</string>
     <string name="nav_popular">Popular movies</string>
     <string name="nav_toprated">Top rated movies</string>
+    <string name="nav_favourite">Favourite movie</string>
+    <string name="nav_mymovies">My saved movies</string>
     <string name="snackbar_network_error">Opps!! Network error</string>
 </resources>

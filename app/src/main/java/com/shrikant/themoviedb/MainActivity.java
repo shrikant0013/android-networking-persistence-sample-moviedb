@@ -2,7 +2,10 @@ package com.shrikant.themoviedb;
 
 import com.shrikant.themoviedb.fragments.FavouriteMovieFragment;
 import com.shrikant.themoviedb.fragments.NowShowingMoviesFragment;
+import com.shrikant.themoviedb.fragments.PopularMoviesFragment;
+import com.shrikant.themoviedb.fragments.SavedMoviesFragment;
 import com.shrikant.themoviedb.fragments.TopRatedMoviesFragment;
+import com.shrikant.themoviedb.models.Movie;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -20,8 +23,11 @@ import android.view.View;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+    implements PopularMoviesFragment.OnItemSelectedListener,
+        SavedMoviesFragment.OnItemSelectedListener {
 
+    private static final String TAG = "MainActivity";
     private ActionBarDrawerToggle mDrawerToggle;
 
     @BindView(R.id.toolbar)
@@ -99,19 +105,29 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.nav_nowplaying_fragment:
-                Log.i("Main", "First item selected");
+                Log.i(TAG, "First item selected");
                 fragmentClass = NowShowingMoviesFragment.class;
                 setTitle(R.string.nav_now_playing);
                 break;
-            case R.id.nav_popular_fragment:
-                Log.i("Main", "Second item selected");
+            case R.id.nav_favourite_fragment:
+                Log.i(TAG, "Second item selected");
                 fragmentClass = FavouriteMovieFragment.class;
+                setTitle(R.string.nav_favourite);
+                break;
+            case R.id.nav_popular_fragment:
+                Log.i(TAG, "Third item selected");
+                fragmentClass = PopularMoviesFragment.class;
                 setTitle(R.string.nav_popular);
                 break;
             case R.id.nav_toprated_fragment:
-                Log.i("Main", "Third item selected");
+                Log.i(TAG, "Retrofit item selected");
                 fragmentClass = TopRatedMoviesFragment.class;
                 setTitle(R.string.nav_toprated);
+                break;
+            case R.id.nav_dbflow_fragment:
+                Log.i(TAG, "DBFlow item selected");
+                fragmentClass = SavedMoviesFragment.class;
+                setTitle(R.string.nav_mymovies);
                 break;
             default:
                 fragmentClass = NowShowingMoviesFragment.class;
@@ -131,9 +147,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
-        // Set action bar title
-        //setTitle(menuItem.getTitle());
-        // Close the navigation drawer
         mDrawerLayout.closeDrawers();
+    }
+
+    @Override
+    public void onPopularMovieSelected(Movie movie) {
+        Log.i(TAG, "Saving " + movie.getTitle());
+        movie.save();
+    }
+
+    @Override
+    public void onSavedMovieSelected(Movie movie) {
+        Log.i(TAG, "Deleting " + movie.getTitle());
+        movie.delete();
     }
 }

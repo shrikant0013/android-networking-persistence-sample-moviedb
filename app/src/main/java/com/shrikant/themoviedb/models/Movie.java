@@ -4,56 +4,87 @@ package com.shrikant.themoviedb.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import com.raizlabs.android.dbflow.annotation.Column;
+import com.raizlabs.android.dbflow.annotation.PrimaryKey;
+import com.raizlabs.android.dbflow.annotation.Table;
+import com.raizlabs.android.dbflow.structure.BaseModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movie {
+@Table(database = MovieDatabase.class)
+public class Movie extends BaseModel {
 
     @SerializedName("poster_path")
     @Expose
+    @Column
     private String posterPath;
+
     @SerializedName("adult")
     @Expose
     private Boolean adult;
+
     @SerializedName("overview")
     @Expose
+    @Column
     private String overview;
+
     @SerializedName("release_date")
     @Expose
+    @Column
     private String releaseDate;
+
     @SerializedName("genre_ids")
     @Expose
     private List<Long> genreIds = new ArrayList<Long>();
+
     @SerializedName("id")
     @Expose
+    @Column
+    @PrimaryKey
     private Long id;
+
     @SerializedName("original_title")
     @Expose
+    @Column
     private String originalTitle;
+
     @SerializedName("original_language")
     @Expose
     private String originalLanguage;
+
     @SerializedName("title")
     @Expose
+    @Column
     private String title;
+
     @SerializedName("backdrop_path")
     @Expose
+    @Column
     private String backdropPath;
+
     @SerializedName("popularity")
     @Expose
+    @Column
     private Double popularity;
+
     @SerializedName("vote_count")
     @Expose
+    @Column
     private Long voteCount;
+
     @SerializedName("video")
     @Expose
     private Boolean video;
+
     @SerializedName("vote_average")
     @Expose
+    @Column
     private Double voteAverage;
 
     @SerializedName("tagline")
     @Expose
+    @Column
     private String tagLine;
 
     public String getTagLine() {

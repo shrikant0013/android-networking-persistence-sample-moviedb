@@ -3,13 +3,15 @@ package com.shrikant.themoviedb.fragments;
 import com.shrikant.themoviedb.R;
 import com.shrikant.themoviedb.adapters.RecyclerViewMoviesAdapter;
 import com.shrikant.themoviedb.models.Movie;
-import com.shrikant.themoviedb.network.AsyncHTTPClientExample;
+import com.shrikant.themoviedb.network.RetrofitExample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,11 +24,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by spandhare on 10/23/16.
+ * Created by spandhare on 10/24/16.
  */
 
-public class NowShowingMoviesFragment extends Fragment {
-    //public LinearLayoutManager layoutManager;
+public class PopularMoviesFragment extends Fragment {
+
+    private static final String TAG = "PopularMoviesFragment";
     public ArrayList<Movie> mMovies;
     public RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
 
@@ -44,16 +47,6 @@ public class NowShowingMoviesFragment extends Fragment {
         mRecyclerViewMovies.setHasFixedSize(true);
 
 
-//        // Setup layout manager for items
-//        layoutManager = new LinearLayoutManager(getActivity());
-//
-//        // Control orientation of the items
-//        // also supports LinearLayoutManager.HORIZONTAL
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//
-//        // Optionally customize the position you want to default scroll to
-//        layoutManager.scrollToPosition(0);
-
         // Set layout manager to position the items
         // Attach the layout manager to the recycler view
         mRecyclerViewMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -67,7 +60,7 @@ public class NowShowingMoviesFragment extends Fragment {
             mRecyclerViewMoviesAdapter.notifyDataSetChanged();
 
             //kick off network query
-            populateCurrentMovies();
+            populateTopRatedMovies();
         }
         return v;
     }
@@ -79,12 +72,20 @@ public class NowShowingMoviesFragment extends Fragment {
         mMovies = new ArrayList<>();
         mRecyclerViewMoviesAdapter =
                 new RecyclerViewMoviesAdapter(getActivity(),
-                mMovies);
+                        mMovies);
+        mRecyclerViewMoviesAdapter.setMoviePersistsListener(new RecyclerViewMoviesAdapter.MoviePersistsListener() {
+            @Override
+            public void onMovieClick(Movie movie) {
+                Log.i(TAG, "Reached onMovieClick");
+                mOnItemSelectedListener.onPopularMovieSelected(movie);
+            }
+        });
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        Log.i("Home", "Home resume");
     }
 
     protected boolean isOnline() {
@@ -97,10 +98,33 @@ public class NowShowingMoviesFragment extends Fragment {
         return false;
     }
 
-    void populateCurrentMovies() {
-        AsyncHTTPClientExample client = new AsyncHTTPClientExample(
-                mRecyclerViewMoviesAdapter, mMovies, getContext());
+    void populateTopRatedMovies() {
+        RetrofitExample
+                .with(getContext())
+                .load(mMovies)
+                .into(mRecyclerViewMoviesAdapter)
+                .updateTopRatedMovies();
+    }
 
-        client.getCurrentMovies();
+    // Define the listener of the interface type
+    // listener will the activity instance containing fragment
+    private OnItemSelectedListener mOnItemSelectedListener;
+
+    // Define the events that the fragment will use to communicate
+    public interface OnItemSelectedListener {
+        // This can be any number of events to be sent to the activity
+        void onPopularMovieSelected(Movie movie);
+    }
+
+    // Store the listener (activity) that will have events fired once the fragment is attached
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnItemSelectedListener) {
+            mOnItemSelectedListener = (OnItemSelectedListener) context;
+        } else {
+            throw new ClassCastException(context.toString()
+                    + " must implement PopularMoviesFragment.OnItemSelectedListener");
+        }
     }
 }

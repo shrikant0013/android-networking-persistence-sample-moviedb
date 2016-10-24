@@ -8,7 +8,7 @@ Purpose of this app is to demostrate usage of various networking and persistence
 The app does following
 
  * Demonstrates use of HttpURLConnection and AsyncTask
-    * Follow [Displaying Remote Images (The "Hard" Way)](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#displaying-remote-images-the-hard-way) on our cliffnotes for a step-by-step tutorial.
+    * Follow [Displaying Remote Images (The "Hard" Way)](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#displaying-remote-images-the-hard-way) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
  * Demonstrates use of Android AsyncHTTPClient third-party library
     * Follow [Using Android Async Http Client](http://guides.codepath.com/android/Using-Android-Async-Http-Client) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
  * Demonstrates use of [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests

@@ -1,7 +1,7 @@
 package com.shrikant.themoviedb.network;
 
 import com.shrikant.themoviedb.R;
-import com.shrikant.themoviedb.adapters.ComplexRecyclerViewCurrentMoviesAdapter;
+import com.shrikant.themoviedb.adapters.RecyclerViewMoviesAdapter;
 import com.shrikant.themoviedb.models.Movie;
 import com.shrikant.themoviedb.models.MovieList;
 import com.shrikant.themoviedb.network.retro.TheMovieDBService;
@@ -20,17 +20,19 @@ import retrofit2.Response;
  */
 
 public class RetrofitExample {
-    private ComplexRecyclerViewCurrentMoviesAdapter mComplexRecyclerViewCurrentMoviesAdapter;
+
+    private static final String TAG = "RetrofitExample";
+    private RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
     private ArrayList<Movie> mMovies;
     private Context mContext;
 
     private static RetrofitExample singletonInstance;
 
     public RetrofitExample(
-            ComplexRecyclerViewCurrentMoviesAdapter complexRecyclerViewCurrentMoviesAdapter,
+            RecyclerViewMoviesAdapter recyclerViewMoviesAdapter,
             ArrayList<Movie> movies,
             Context context) {
-        mComplexRecyclerViewCurrentMoviesAdapter = complexRecyclerViewCurrentMoviesAdapter;
+        mRecyclerViewMoviesAdapter = recyclerViewMoviesAdapter;
         mMovies = movies;
         mContext = context;
     }
@@ -57,13 +59,13 @@ public class RetrofitExample {
         return singletonInstance;
     }
 
-    public RetrofitExample into(ComplexRecyclerViewCurrentMoviesAdapter complexRecyclerViewCurrentMoviesAdapter) {
-        mComplexRecyclerViewCurrentMoviesAdapter = complexRecyclerViewCurrentMoviesAdapter;
+    public RetrofitExample into(RecyclerViewMoviesAdapter recyclerViewMoviesAdapter) {
+        mRecyclerViewMoviesAdapter = recyclerViewMoviesAdapter;
         return singletonInstance;
     }
 
     public void updateTopRatedMovies() {
-        Log.i("Retroexample", "Ready to update movies");
+        Log.i(TAG, "Ready for Movies!");
         final Call<MovieList> call =
                 TheMovieDBService.topMovies.fetchTopRated(mContext.getString(R.string.api_key));
 
@@ -71,24 +73,22 @@ public class RetrofitExample {
             @Override
             public void onResponse(Call<MovieList> call, Response<MovieList> response) {
 
-                Log.i("Retroexample", call.request().url().toString());
-                int statusCode = response.code();
+                Log.i(TAG, call.request().url().toString());
+                Log.i(TAG, "Response Status code: " + response.code());
 
                 MovieList fetchedMovies = response.body();
-                Log.i("SearchActivity", fetchedMovies.getResults().size() + " movies found");
                 mMovies.clear();
                 mMovies.addAll(fetchedMovies.getResults());
 
-                Log.i("SearchActivity", mMovies.size() + " movies found");
-
-                mComplexRecyclerViewCurrentMoviesAdapter.notifyDataSetChanged();
+                Log.i(TAG, mMovies.size() + " movies found");
+                mRecyclerViewMoviesAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<MovieList> call, Throwable t) {
                 // Log error here since request failed
-                Log.i("Retroexample", call.request().url().toString());
-                Log.i("Retroexample", "failure:" + t.getMessage());
+                Log.i(TAG, call.request().url().toString());
+                Log.i(TAG, t.getMessage());
             }
         });
     }

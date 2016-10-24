@@ -35,11 +35,15 @@ public class ImageTextViewHolder extends RecyclerView.ViewHolder
     List<Movie> mMovies;
     Context mContext;
 
-    public ImageTextViewHolder(Context context, View view, List<Movie> movies) {
+    private RecyclerViewMoviesAdapter.MoviePersistsListener mMoviePersistsListener;
+
+    public ImageTextViewHolder(Context context, View view, List<Movie> movies,
+                               RecyclerViewMoviesAdapter.MoviePersistsListener listener) {
         super(view);
 
         this.mMovies = movies;
         this.mContext = context;
+        this.mMoviePersistsListener = listener;
 
         // Attach a click listener to the entire row view
         view.setOnClickListener(this);
@@ -50,14 +54,15 @@ public class ImageTextViewHolder extends RecyclerView.ViewHolder
     @Override
     public void onClick(View view) {
 
-//        int position = getLayoutPosition(); // gets item position
-//        Movie movie = mTweets.get(position);
-//        // We can access the data within the views
-        Toast.makeText(mContext, "Loading movie...", Toast.LENGTH_SHORT).show();
-//
-//        Intent i = new Intent(mContext, TweetDetailActivity.class);
-//        i.putExtra("movie",movie);
-//        mContext.startActivity(i);
+        int position = getLayoutPosition(); // gets item position
+        Movie movie = mMovies.get(position);
+
+        if (mMoviePersistsListener != null) {
+            mMoviePersistsListener.onMovieClick(movie);
+        }
+
+        // We can access the data within the views
+        //movie.save();
+        Toast.makeText(mContext, "Clicked movie...", Toast.LENGTH_SHORT).show();
     }
 }
-

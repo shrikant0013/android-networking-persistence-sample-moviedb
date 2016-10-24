@@ -18,14 +18,14 @@ import java.util.List;
  * Created by spandhare on 10/23/16.
  */
 
-public class ComplexRecyclerViewCurrentMoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerViewMoviesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // The items to display in your RecyclerView
     private static List<Movie> sMovies;
     private static Context mContext;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ComplexRecyclerViewCurrentMoviesAdapter(Context context, ArrayList<Movie> movies) {
+    public RecyclerViewMoviesAdapter(Context context, ArrayList<Movie> movies) {
         this.sMovies = movies;
         mContext = context;
     }
@@ -41,7 +41,8 @@ public class ComplexRecyclerViewCurrentMoviesAdapter extends RecyclerView.Adapte
         LayoutInflater inflater = LayoutInflater.from(viewGroup.getContext());
 
         View view = inflater.inflate(R.layout.item_box_office_movie, viewGroup, false);
-        RecyclerView.ViewHolder viewHolder = new ImageTextViewHolder(mContext, view, sMovies);
+        RecyclerView.ViewHolder viewHolder = new ImageTextViewHolder(mContext,
+                view, sMovies, mMoviePersistsListener);
 
         return viewHolder;
     }
@@ -66,5 +67,18 @@ public class ComplexRecyclerViewCurrentMoviesAdapter extends RecyclerView.Adapte
                 .into(viewHolder.mImageViewPosterImage);
 
         viewHolder.mTextViewTitle.setText(movie.getTitle());
+    }
+
+    public interface MoviePersistsListener {
+        // These methods are the different events and
+        // need to pass relevant arguments related to the event triggered
+        void onMovieClick(Movie movie);
+    }
+
+    private MoviePersistsListener mMoviePersistsListener;
+
+    // Assign the listener implementing events interface that will receive the events
+    public void setMoviePersistsListener(MoviePersistsListener listener) {
+        this.mMoviePersistsListener = listener;
     }
 }
