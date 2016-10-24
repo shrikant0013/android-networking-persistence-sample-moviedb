@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<group android:checkableBehavior="single">-->
+        <!--<item-->
+            <!--android:id="@+id/nav_first_fragment"-->
+            <!--android:icon="@drawable/ic_one"-->
+            <!--android:title="First" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_second_fragment"-->
+            <!--android:icon="@drawable/ic_two"-->
+            <!--android:title="Second" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_third_fragment"-->
+            <!--android:icon="@drawable/ic_three"-->
+            <!--android:title="Third" />-->
+    <!--</group>-->
+
+    <item android:title="Networking">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_nowplaying_fragment"
+                    android:icon="@drawable/ic_one"
+                    android:title="Async" />
+                <item
+                    android:id="@+id/nav_popular_fragment"
+                    android:icon="@drawable/ic_two"
+                    android:title="AsyncHttpClient" />
+                <item
+                    android:id="@+id/nav_toprated_fragment"
+                    android:icon="@drawable/ic_three"
+                    android:title="Retrofit" />
+            </group>
+        </menu>
+    </item>
+
+    <item android:title="Persistence">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_dbflow_fragment"
+                    android:icon="@drawable/ic_one"
+                    android:title="DBFlow" />
+                <item
+                    android:id="@+id/nav_sugarorm_fragment"
+                    android:icon="@drawable/ic_two"
+                    android:title="SugarORM" />
+            </group>
+        </menu>
+    </item>
+
+</menu>
