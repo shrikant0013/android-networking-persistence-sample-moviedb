@@ -52,3 +52,4 @@ captures/
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
 ./app/src/main/res/values/secrets.xml
+app/src/main/res/values/secrets.xml
