@@ -16,6 +16,12 @@ The app does following
  * Demonstrates use of Android [Picasso](http://square.github.io/picasso/) - For remote image loading third party library
     * Follow [Displaying Images with the Picasso Library](http://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
 
+The app has following features
+ * [Fragment navgation drawer](http://guides.codepath.com/android/Fragment-Navigation-Drawer)
+ * Use of [Action bar](http://guides.codepath.com/android/Extended-ActionBar-Guide)
+ * Displays list of movies using [RecyclerView](http://guides.codepath.com/android/Using-the-RecyclerView)
+ * Displays content using [Fragments](http://guides.codepath.com/android/Creating-and-Using-Fragments)
+
 ## Installation
 
 Quick note is that you must **provide your own API key** for The Movie DB API in order to use this demo. To get an API key, you need to [register for an account](https://www.themoviedb.org/account/signup) (or [sign in](https://www.themoviedb.org/login)). Once you have the key, put the key into the `API_KEY` constant in the `./app/src/main/res/values/secrets.xml` file: 
