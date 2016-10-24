@@ -33,3 +33,7 @@ Quick note is that you must **provide your own API key** for The Movie DB API in
 ```
 
 Once you've setup the key and imported the project into Android Studio, you should be all set.
+
+## Attribution
+ 
+This code was created by [Shrikant Pandhare](https://github.com/shrikant0013) in 2016 for use in CodePath sessions.
