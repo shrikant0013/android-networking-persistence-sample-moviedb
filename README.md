@@ -8,13 +8,13 @@ Purpose of this app is to demostrate usage of various networking and persistence
 The app does following
 
  * Demonstrates use of HttpURLConnection and AsyncTask
- ** Follow [Displaying Remote Images (The "Hard" Way)](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#displaying-remote-images-the-hard-way) on our cliffnotes for a step-by-step tutorial.
+    * Follow [Displaying Remote Images (The "Hard" Way)](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#displaying-remote-images-the-hard-way) on our cliffnotes for a step-by-step tutorial.
  * Demonstrates use of Android AsyncHTTPClient third-party library
- ** Follow [Using Android Async Http Client](http://guides.codepath.com/android/Using-Android-Async-Http-Client) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
+    * Follow [Using Android Async Http Client](http://guides.codepath.com/android/Using-Android-Async-Http-Client) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
  * Demonstrates use of [Android AsyncHTTPClient](http://loopj.com/android-async-http/) - For asynchronous network requests
- ** Follow [Consuming APIs with Retrofit](http://guides.codepath.com/android/Consuming-APIs-with-Retrofit) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
+    * Follow [Consuming APIs with Retrofit](http://guides.codepath.com/android/Consuming-APIs-with-Retrofit) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
  * Demonstrates use of Android [Picasso](http://square.github.io/picasso/) - For remote image loading third party library
- ** Follow [Displaying Images with the Picasso Library](http://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
+    * Follow [Displaying Images with the Picasso Library](http://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
 
 ## Installation
 
