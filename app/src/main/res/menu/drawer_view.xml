@@ -6,11 +6,11 @@
                 <item
                     android:id="@+id/nav_nowplaying_fragment"
                     android:icon="@drawable/ic_one"
-                    android:title="AsyncTask" />
+                    android:title="AsyncHttpClient" />
                 <item
                     android:id="@+id/nav_favourite_fragment"
                     android:icon="@drawable/ic_two"
-                    android:title="AsyncHttpClient" />
+                    android:title="AsyncTask" />
 
                 <item
                     android:id="@+id/nav_popular_fragment"

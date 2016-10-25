@@ -3,7 +3,7 @@ package com.shrikant.themoviedb.fragments;
 import com.shrikant.themoviedb.R;
 import com.shrikant.themoviedb.adapters.RecyclerViewMoviesAdapter;
 import com.shrikant.themoviedb.models.Movie;
-import com.shrikant.themoviedb.network.RetrofitExample;
+import com.shrikant.themoviedb.network.OkHttpExample;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -60,7 +60,7 @@ public class PopularMoviesFragment extends Fragment {
             mRecyclerViewMoviesAdapter.notifyDataSetChanged();
 
             //kick off network query
-            populateTopRatedMovies();
+            populatePopularMovies();
         }
         return v;
     }
@@ -73,7 +73,8 @@ public class PopularMoviesFragment extends Fragment {
         mRecyclerViewMoviesAdapter =
                 new RecyclerViewMoviesAdapter(getActivity(),
                         mMovies);
-        mRecyclerViewMoviesAdapter.setMoviePersistsListener(new RecyclerViewMoviesAdapter.MoviePersistsListener() {
+        mRecyclerViewMoviesAdapter.setMoviePersistsListener(
+                new RecyclerViewMoviesAdapter.MoviePersistsListener() {
             @Override
             public void onMovieClick(Movie movie) {
                 Log.i(TAG, "Reached onMovieClick");
@@ -85,7 +86,6 @@ public class PopularMoviesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("Home", "Home resume");
     }
 
     protected boolean isOnline() {
@@ -98,12 +98,11 @@ public class PopularMoviesFragment extends Fragment {
         return false;
     }
 
-    void populateTopRatedMovies() {
-        RetrofitExample
-                .with(getContext())
-                .load(mMovies)
-                .into(mRecyclerViewMoviesAdapter)
-                .updateTopRatedMovies();
+    void populatePopularMovies() {
+        OkHttpExample client = new OkHttpExample(
+                mRecyclerViewMoviesAdapter, mMovies, getContext());
+
+        client.updatePopularMovies();
     }
 
     // Define the listener of the interface type

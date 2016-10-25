@@ -7,9 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.RequestParams;
-import com.loopj.android.http.TextHttpResponseHandler;
+import com.shrikant.themoviedb.MainActivity;
 import com.shrikant.themoviedb.R;
 import com.shrikant.themoviedb.adapters.RecyclerViewMoviesAdapter;
 import com.shrikant.themoviedb.models.Movie;
@@ -18,47 +16,60 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import cz.msebera.android.httpclient.Header;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
- * Created by spandhare on 10/23/16.
+ * Created by spandhare on 10/24/16.
  */
 
-public class AsyncHTTPClientExample {
+public class OkHttpExample {
 
-    private static final String TAG = "AsyncHTTPClientExample";
+    private static final String TAG = "OkHttpExample";
     private final static String API_KEY = "api_key";
     private final static String LANGUAGE = "language";
-    private String URL = "https://api.themoviedb.org/3/movie/now_playing";
+    private String URL = "https://api.themoviedb.org/3/movie/popular";
     private RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
     private ArrayList<Movie> mMovies;
     private Context mContext;
 
-    public AsyncHTTPClientExample(
-            RecyclerViewMoviesAdapter recyclerViewMoviesAdapter,
-            ArrayList<Movie> movies,
-            Context context) {
+
+    public OkHttpExample(RecyclerViewMoviesAdapter recyclerViewMoviesAdapter, ArrayList<Movie> movies, Context context) {
         mRecyclerViewMoviesAdapter = recyclerViewMoviesAdapter;
         mMovies = movies;
         mContext = context;
     }
 
-    public ArrayList<Movie> updateNowPlayingMovies() {
-        Log.i(TAG,"Getting Now playing");
-        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
-        RequestParams requestParams = constructQueryRequestParams();
+    public void updatePopularMovies() {
+        Request request = new Request.Builder()
+                .url(constructQueryRequestParams())
+                .build();
 
-        asyncHttpClient.get(URL, requestParams, new TextHttpResponseHandler() {
+        //Asynchronous Network Calls
+        // Get a handler that can be used to post to the main thread
+        // should be a singleton
+        OkHttpClient client = new OkHttpClient();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, String response) {
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected code " + response);
+                }
+
+                String responseData = response.body().string();
                 try {
-                    if (response != null) {
+                    if (responseData != null) {
                         Gson gson = new GsonBuilder().create();
-                        JsonObject jsonObject = gson.fromJson(response, JsonObject.class);
+                        JsonObject jsonObject = gson.fromJson(responseData, JsonObject.class);
                         if (jsonObject.has("results")) {
                             JsonArray jsonResultsArray = jsonObject.getAsJsonArray("results");
                             if (jsonResultsArray != null) {
@@ -80,26 +91,29 @@ public class AsyncHTTPClientExample {
                                     "some problem, try again",
                             Toast.LENGTH_SHORT).show();
                 }
-                mRecyclerViewMoviesAdapter.notifyDataSetChanged();
+                // Run view-related code back on the main thread
+                ((MainActivity)mContext).runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRecyclerViewMoviesAdapter.notifyDataSetChanged();
+                    }
+                });
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, String response,
-                                  Throwable throwable) {
-                Log.w(TAG, "HTTP Request failure: " + statusCode + " " +
-                        throwable.getMessage());
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
             }
-        });
 
-        return null;
+        });
     }
 
-    public RequestParams constructQueryRequestParams() {
+    public String constructQueryRequestParams() {
 
-        RequestParams requestParams = new RequestParams();
-        requestParams.put(API_KEY,  mContext.getString(R.string.api_key));
-        requestParams.put(LANGUAGE, "en-US");
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(URL).newBuilder();
+        urlBuilder.addQueryParameter(API_KEY, mContext.getString(R.string.api_key));
+        urlBuilder.addQueryParameter(LANGUAGE, "en-US");
 
-        return requestParams;
+        return  urlBuilder.build().toString();
     }
 }

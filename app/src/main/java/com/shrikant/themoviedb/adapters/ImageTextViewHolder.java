@@ -54,15 +54,16 @@ public class ImageTextViewHolder extends RecyclerView.ViewHolder
     @Override
     public void onClick(View view) {
 
-        int position = getLayoutPosition(); // gets item position
+        // gets item position
+        int position = getLayoutPosition();
+
+        // We can access the data within the views
         Movie movie = mMovies.get(position);
 
         if (mMoviePersistsListener != null) {
             mMoviePersistsListener.onMovieClick(movie);
         }
 
-        // We can access the data within the views
-        //movie.save();
         Toast.makeText(mContext, "Clicked movie...", Toast.LENGTH_SHORT).show();
     }
 }

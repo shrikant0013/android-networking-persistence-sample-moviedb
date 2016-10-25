@@ -8,14 +8,10 @@ import java.util.ArrayList;
  * Created by spandhare on 10/23/16.
  */
 
-public class MockHTTPClient implements NetworkClient {
+public class MockHTTPClient {
 
     //String response_String =
-
-    @Override
     public ArrayList<Movie> getCurrentMovies() {
-
-
         return null;
     }
 }

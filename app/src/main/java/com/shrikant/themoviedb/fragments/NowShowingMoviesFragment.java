@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
  */
 
 public class NowShowingMoviesFragment extends Fragment {
-    //public LinearLayoutManager layoutManager;
+
     public ArrayList<Movie> mMovies;
     public RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
 
@@ -43,18 +43,6 @@ public class NowShowingMoviesFragment extends Fragment {
         mRecyclerViewMovies.setAdapter(mRecyclerViewMoviesAdapter);
         mRecyclerViewMovies.setHasFixedSize(true);
 
-
-//        // Setup layout manager for items
-//        layoutManager = new LinearLayoutManager(getActivity());
-//
-//        // Control orientation of the items
-//        // also supports LinearLayoutManager.HORIZONTAL
-//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//
-//        // Optionally customize the position you want to default scroll to
-//        layoutManager.scrollToPosition(0);
-
-        // Set layout manager to position the items
         // Attach the layout manager to the recycler view
         mRecyclerViewMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -101,6 +89,6 @@ public class NowShowingMoviesFragment extends Fragment {
         AsyncHTTPClientExample client = new AsyncHTTPClientExample(
                 mRecyclerViewMoviesAdapter, mMovies, getContext());
 
-        client.getCurrentMovies();
+        client.updateNowPlayingMovies();
     }
 }

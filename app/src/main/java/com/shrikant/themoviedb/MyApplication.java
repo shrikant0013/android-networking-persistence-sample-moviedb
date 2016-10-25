@@ -15,7 +15,5 @@ public class MyApplication extends Application {
         super.onCreate();
         // This instantiates DBFlow
         FlowManager.init(new FlowConfig.Builder(this).build());
-        // add for verbose logging
-        // FlowLog.setMinimumLoggingLevel(FlowLog.Level.V);
     }
 }

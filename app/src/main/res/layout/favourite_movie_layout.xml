@@ -3,13 +3,20 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/tvFavouriteMovieTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:padding="5dp"/>
+
     <ImageView
+        android:layout_below="@id/tvFavouriteMovieTitle"
         android:layout_width="400dp"
         android:layout_height="500dp"
         android:id="@+id/ivFavouriteMovieImage"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="198dp"
-        android:scaleType="fitXY" />
-
+        android:scaleType="fitXY"
+        android:padding="5dp"/>
 </RelativeLayout>
