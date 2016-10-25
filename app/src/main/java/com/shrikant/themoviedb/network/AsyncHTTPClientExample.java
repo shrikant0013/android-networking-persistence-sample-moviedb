@@ -16,6 +16,7 @@ import com.shrikant.themoviedb.models.Movie;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
@@ -37,17 +38,25 @@ public class AsyncHTTPClientExample {
     private RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
     private ArrayList<Movie> mMovies;
     private Context mContext;
+    private com.wang.avi.AVLoadingIndicatorView mLoadingIndicatorView;
 
     public AsyncHTTPClientExample(
             RecyclerViewMoviesAdapter recyclerViewMoviesAdapter,
             ArrayList<Movie> movies,
+            com.wang.avi.AVLoadingIndicatorView loadingIndicatorView,
             Context context) {
         mRecyclerViewMoviesAdapter = recyclerViewMoviesAdapter;
         mMovies = movies;
         mContext = context;
+        mLoadingIndicatorView = loadingIndicatorView;
     }
 
     public ArrayList<Movie> updateNowPlayingMovies() {
+
+        //Show loading animation
+        mLoadingIndicatorView.setVisibility(View.VISIBLE);
+        mLoadingIndicatorView.show();
+
         Log.i(TAG,"Getting Now playing");
         AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
         RequestParams requestParams = constructQueryRequestParams();
@@ -80,6 +89,11 @@ public class AsyncHTTPClientExample {
                                     "some problem, try again",
                             Toast.LENGTH_SHORT).show();
                 }
+
+                //Hide loading animation
+                mLoadingIndicatorView.setVisibility(View.INVISIBLE);
+                mLoadingIndicatorView.hide();
+
                 mRecyclerViewMoviesAdapter.notifyDataSetChanged();
             }
 

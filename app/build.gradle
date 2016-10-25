@@ -58,5 +58,11 @@ dependencies {
     //OkHttp
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
+    //Volley
+    compile 'com.android.volley:volley:1.0.0'
+
+    //loading animation
+    compile 'com.wang.avi:library:2.1.3'
+
     testCompile 'junit:junit:4.12'
 }

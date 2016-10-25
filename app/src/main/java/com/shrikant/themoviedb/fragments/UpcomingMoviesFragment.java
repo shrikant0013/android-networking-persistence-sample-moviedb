@@ -3,7 +3,7 @@ package com.shrikant.themoviedb.fragments;
 import com.shrikant.themoviedb.R;
 import com.shrikant.themoviedb.adapters.RecyclerViewMoviesAdapter;
 import com.shrikant.themoviedb.models.Movie;
-import com.shrikant.themoviedb.network.AsyncHTTPClientExample;
+import com.shrikant.themoviedb.network.VolleyExample;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -22,11 +22,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by spandhare on 10/23/16.
+ * Created by spandhare on 10/24/16.
  */
 
-public class NowShowingMoviesFragment extends Fragment {
+public class UpcomingMoviesFragment  extends Fragment {
 
+    private static final String TAG = "UpcomingMoviesFragment";
     public ArrayList<Movie> mMovies;
     public RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
 
@@ -46,6 +47,7 @@ public class NowShowingMoviesFragment extends Fragment {
         mRecyclerViewMovies.setAdapter(mRecyclerViewMoviesAdapter);
         mRecyclerViewMovies.setHasFixedSize(true);
 
+        // Set layout manager to position the items
         // Attach the layout manager to the recycler view
         mRecyclerViewMovies.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -58,7 +60,7 @@ public class NowShowingMoviesFragment extends Fragment {
             mRecyclerViewMoviesAdapter.notifyDataSetChanged();
 
             //kick off network query
-            populateCurrentMovies();
+            populateUpcomingdMovies();
         }
         return v;
     }
@@ -70,7 +72,7 @@ public class NowShowingMoviesFragment extends Fragment {
         mMovies = new ArrayList<>();
         mRecyclerViewMoviesAdapter =
                 new RecyclerViewMoviesAdapter(getActivity(),
-                mMovies);
+                        mMovies);
     }
 
     @Override
@@ -88,10 +90,9 @@ public class NowShowingMoviesFragment extends Fragment {
         return false;
     }
 
-    void populateCurrentMovies() {
-        AsyncHTTPClientExample client = new AsyncHTTPClientExample(
+    void populateUpcomingdMovies() {
+        VolleyExample client = new VolleyExample(
                 mRecyclerViewMoviesAdapter, mMovies, mLoadingIndicatorView, getContext());
-
-        client.updateNowPlayingMovies();
+        client.updateUpcomingMovies();
     }
 }

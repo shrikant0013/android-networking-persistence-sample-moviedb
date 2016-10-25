@@ -5,22 +5,26 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_nowplaying_fragment"
-                    android:icon="@drawable/ic_one"
+                    android:icon="@drawable/ic_view_list_black_48dp"
                     android:title="AsyncHttpClient" />
                 <item
                     android:id="@+id/nav_favourite_fragment"
-                    android:icon="@drawable/ic_two"
+                    android:icon="@drawable/ic_view_list_black_48dp"
                     android:title="AsyncTask" />
 
                 <item
                     android:id="@+id/nav_popular_fragment"
-                    android:icon="@drawable/ic_three"
+                    android:icon="@drawable/ic_view_list_black_48dp"
                     android:title="OkHttp" />
 
                 <item
                     android:id="@+id/nav_toprated_fragment"
-                    android:icon="@drawable/ic_three"
+                    android:icon="@drawable/ic_view_list_black_48dp"
                     android:title="Retrofit" />
+                <item
+                    android:id="@+id/nav_upcoming_fragment"
+                    android:icon="@drawable/ic_view_list_black_48dp"
+                    android:title="Volley" />
             </group>
         </menu>
     </item>
@@ -29,12 +33,8 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_dbflow_fragment"
-                    android:icon="@drawable/ic_one"
+                    android:icon="@drawable/ic_view_list_black_48dp"
                     android:title="DBFlow" />
-                <item
-                    android:id="@+id/nav_sugarorm_fragment"
-                    android:icon="@drawable/ic_two"
-                    android:title="SQLite" />
             </group>
         </menu>
     </item>
@@ -43,7 +43,7 @@
             <group android:checkableBehavior="single">
                 <item
                     android:id="@+id/nav_customlistner_fragment"
-                    android:icon="@drawable/ic_one"
+                    android:icon="@drawable/ic_view_list_black_48dp"
                     android:title="Custom Listeners" />
             </group>
         </menu>

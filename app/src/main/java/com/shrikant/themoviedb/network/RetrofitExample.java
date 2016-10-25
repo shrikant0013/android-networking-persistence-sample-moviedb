@@ -8,6 +8,7 @@ import com.shrikant.themoviedb.network.retro.TheMovieDBService;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -25,6 +26,7 @@ public class RetrofitExample {
     private RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
     private ArrayList<Movie> mMovies;
     private Context mContext;
+    private com.wang.avi.AVLoadingIndicatorView mLoadingIndicatorView;
 
     private static RetrofitExample singletonInstance;
 
@@ -64,7 +66,17 @@ public class RetrofitExample {
         return singletonInstance;
     }
 
+    public RetrofitExample placeholder(com.wang.avi.AVLoadingIndicatorView loadingIndicatorView) {
+        mLoadingIndicatorView = loadingIndicatorView;
+        return singletonInstance;
+    }
+
     public void updateTopRatedMovies() {
+
+        //Startloading Animation
+        mLoadingIndicatorView.setVisibility(View.VISIBLE);
+        mLoadingIndicatorView.show();
+
         Log.i(TAG, "Ready for Movies!");
         final Call<MovieList> call =
                 TheMovieDBService.topMovies.fetchTopRated(mContext.getString(R.string.api_key));
@@ -81,6 +93,11 @@ public class RetrofitExample {
                 mMovies.addAll(fetchedMovies.getResults());
 
                 Log.i(TAG, mMovies.size() + " movies found");
+
+                //Hide loading animation
+                mLoadingIndicatorView.setVisibility(View.INVISIBLE);
+                mLoadingIndicatorView.hide();
+
                 mRecyclerViewMoviesAdapter.notifyDataSetChanged();
             }
 

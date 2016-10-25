@@ -36,6 +36,9 @@ public class PopularMoviesFragment extends Fragment {
     @BindView(R.id.rvMovies)
     RecyclerView mRecyclerViewMovies;
 
+    @BindView(R.id.avi)
+    com.wang.avi.AVLoadingIndicatorView mLoadingIndicatorView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
@@ -100,7 +103,7 @@ public class PopularMoviesFragment extends Fragment {
 
     void populatePopularMovies() {
         OkHttpExample client = new OkHttpExample(
-                mRecyclerViewMoviesAdapter, mMovies, getContext());
+                mRecyclerViewMoviesAdapter, mMovies, mLoadingIndicatorView, getContext());
 
         client.updatePopularMovies();
     }

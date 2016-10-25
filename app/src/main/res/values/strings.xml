@@ -8,4 +8,5 @@
     <string name="nav_favourite">Favourite movie</string>
     <string name="nav_mymovies">My saved movies</string>
     <string name="snackbar_network_error">Opps!! Network error</string>
+    <string name="nav_upcoming">Upcoming Movies!</string>
 </resources>

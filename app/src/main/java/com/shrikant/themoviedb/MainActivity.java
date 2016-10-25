@@ -5,6 +5,7 @@ import com.shrikant.themoviedb.fragments.NowShowingMoviesFragment;
 import com.shrikant.themoviedb.fragments.PopularMoviesFragment;
 import com.shrikant.themoviedb.fragments.SavedMoviesFragment;
 import com.shrikant.themoviedb.fragments.TopRatedMoviesFragment;
+import com.shrikant.themoviedb.fragments.UpcomingMoviesFragment;
 import com.shrikant.themoviedb.models.Movie;
 
 import android.os.Bundle;
@@ -65,6 +66,16 @@ public class MainActivity extends AppCompatActivity
         };
 
         setupDrawerContent(mNavigationView);
+
+        try {
+            //Fragment fragment = (Fragment) NowShowingMoviesFragment.class.newInstance();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.flContent, NowShowingMoviesFragment.class.newInstance())
+                    .commit();
+        } catch (IllegalAccessException | InstantiationException e) {
+            Log.e(TAG, "Error in intializing fragment" + e.getMessage());
+        }
     }
 
     @Override
@@ -99,7 +110,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void selectDrawerItem(MenuItem menuItem) {
-
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
@@ -123,6 +133,11 @@ public class MainActivity extends AppCompatActivity
                 Log.i(TAG, "Retrofit item selected");
                 fragmentClass = TopRatedMoviesFragment.class;
                 setTitle(R.string.nav_toprated);
+                break;
+            case R.id.nav_upcoming_fragment:
+                Log.i(TAG, "Volley item selected");
+                fragmentClass = UpcomingMoviesFragment.class;
+                setTitle(R.string.nav_upcoming);
                 break;
             case R.id.nav_dbflow_fragment:
                 Log.i(TAG, "DBFlow item selected");

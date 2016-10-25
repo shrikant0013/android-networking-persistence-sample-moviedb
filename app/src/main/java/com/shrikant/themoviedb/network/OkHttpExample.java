@@ -14,6 +14,7 @@ import com.shrikant.themoviedb.models.Movie;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -41,15 +42,24 @@ public class OkHttpExample {
     private RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
     private ArrayList<Movie> mMovies;
     private Context mContext;
+    private com.wang.avi.AVLoadingIndicatorView mLoadingIndicatorView;
 
-
-    public OkHttpExample(RecyclerViewMoviesAdapter recyclerViewMoviesAdapter, ArrayList<Movie> movies, Context context) {
+    public OkHttpExample(RecyclerViewMoviesAdapter recyclerViewMoviesAdapter,
+                         ArrayList<Movie> movies,
+                         com.wang.avi.AVLoadingIndicatorView loadingIndicatorView,
+                         Context context) {
         mRecyclerViewMoviesAdapter = recyclerViewMoviesAdapter;
         mMovies = movies;
         mContext = context;
+        mLoadingIndicatorView = loadingIndicatorView;
     }
 
     public void updatePopularMovies() {
+
+        //Startloading Animation
+        mLoadingIndicatorView.setVisibility(View.VISIBLE);
+        mLoadingIndicatorView.show();
+
         Request request = new Request.Builder()
                 .url(constructQueryRequestParams())
                 .build();
@@ -95,6 +105,10 @@ public class OkHttpExample {
                 ((MainActivity)mContext).runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        //Hide loading animation
+                        mLoadingIndicatorView.setVisibility(View.INVISIBLE);
+                        mLoadingIndicatorView.hide();
+
                         mRecyclerViewMoviesAdapter.notifyDataSetChanged();
                     }
                 });

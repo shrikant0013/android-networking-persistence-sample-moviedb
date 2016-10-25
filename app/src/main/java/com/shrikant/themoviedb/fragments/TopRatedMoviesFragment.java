@@ -26,12 +26,16 @@ import butterknife.ButterKnife;
  */
 
 public class TopRatedMoviesFragment extends Fragment {
-    //public LinearLayoutManager layoutManager;
+
+    private static final String TAG = "TopRatedMoviesFragment";
     public ArrayList<Movie> mMovies;
     public RecyclerViewMoviesAdapter mRecyclerViewMoviesAdapter;
 
     @BindView(R.id.rvMovies)
     RecyclerView mRecyclerViewMovies;
+
+    @BindView(R.id.avi)
+    com.wang.avi.AVLoadingIndicatorView mLoadingIndicatorView;
 
     @Nullable
     @Override
@@ -91,6 +95,7 @@ public class TopRatedMoviesFragment extends Fragment {
                 .with(getContext())
                 .load(mMovies)
                 .into(mRecyclerViewMoviesAdapter)
+                .placeholder(mLoadingIndicatorView)
                 .updateTopRatedMovies();
     }
 }

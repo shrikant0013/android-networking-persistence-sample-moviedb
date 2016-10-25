@@ -37,7 +37,6 @@ public class FavouriteMovieFragment extends Fragment {
     @BindView(R.id.tvFavouriteMovieTitle)
     TextView mFavouriteMovieTitleTextView;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
