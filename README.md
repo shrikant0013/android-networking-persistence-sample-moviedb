@@ -1,5 +1,4 @@
 # Android Networking and Persistence samples using The Movie DB API
-
 This is an Android demo application for displaying the latest box office movies using the [The Movie DB API](https://www.themoviedb.org/documentation/api/). 
 
 ## Overview
@@ -7,13 +6,12 @@ Purpose of this app is to demostrate usage of various networking and persistence
 
 
 ### Nerworking libraries samples
-
  * HttpURLConnection and AsyncTask
     * Follow [Displaying Remote Images (The "Hard" Way)](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#displaying-remote-images-the-hard-way) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
     ![alt tag](asynctask.jpg)
 
  * [AsyncHTTPClient](http://loopj.com/android-async-http/) - A Callback-Based Http Client Library for Android
-    * Follow [Using Android Async Http Client](http://guides.codepath.com/android/Using-Android-Async-Http-Client) on our [cliffnotes](http://
+    * Follow [Using Android Async Http Client](http://guides.codepath.com/android/Using-Android-Async-Http-Client) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
  * [Picasso](http://square.github.io/picasso/) - For remote image loading third party library
     * Follow [Displaying Images with the Picasso Library](http://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library) on our [cliffnotes](http://guides.codepath.com/) for a step-by-step tutorial.
  * [OkHttp](http://square.github.io/okhttp/) - An HTTP & HTTP/2 client for Android 
@@ -36,7 +34,7 @@ Purpose of this app is to demostrate usage of various networking and persistence
  * Displays list of movies using [RecyclerView](http://guides.codepath.com/android/Using-the-RecyclerView)
  * Displays content using [Fragments](http://guides.codepath.com/android/Creating-and-Using-Fragments)
  * Demonstrates use of [Creating Custom Listeners](http://guides.codepath.com/android/Creating-Custom-Listeners)
-   ![alt tag](acustom_listeners.jpg)
+   ![alt tag](custom_listeners.jpg)
 
 ### Gif
 ![alt tag](networking_samples.gif)
